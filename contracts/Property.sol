@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 
 contract Property is ERC721URIStorage {
-    uint256 private _tokenIdCounter;
+    uint256 private _tokenIdCounter=1;
 
     constructor() ERC721("Property", "HHV") {}
 

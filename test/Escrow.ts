@@ -34,9 +34,13 @@ const testProperty = {
   ],
 };
 
+const tokens = (n: number) => {
+  return ethers.parseUnits(n.toString(), 'ether');
+};
+
 describe('Escrow', () => {
   let buyer, seller, inspector, lender;
-  let property, escrow;
+  let property, escrow, escrowAddress;
 
   beforeEach(async () => {
     // Setup accounts
@@ -59,6 +63,15 @@ describe('Escrow', () => {
       inspector.address,
       lender.address
     );
+
+    // Approve Property
+    escrowAddress = await escrow.getAddress();
+    transaction = await property.connect(seller).approve(escrowAddress, 1);
+    await transaction.wait();
+
+    // List Property
+    transaction = await escrow.connect(seller).list(1);
+    await transaction.wait();
   });
 
   describe('Deployment', () => {
@@ -81,6 +94,12 @@ describe('Escrow', () => {
     it('Returns lender', async () => {
       const result = await escrow.lender();
       expect(result).to.be.equal(lender.address);
+    });
+  });
+
+  describe('Listing', () => {
+    it('Updates ownership', async () => {
+      expect(await property.ownerOf(1)).to.be.equal(escrowAddress);
     });
   });
 });

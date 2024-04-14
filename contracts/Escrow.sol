@@ -22,4 +22,9 @@ contract Escrow {
         lender = _lender;
         inspector = _inspector;
     }
+
+    function list(uint256 _nftId) public {
+        // Transfer NFT from seller to this contract
+        IERC721(nftAddress).transferFrom(msg.sender, address(this), _nftId);
+    }
 }

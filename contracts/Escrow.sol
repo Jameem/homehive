@@ -16,10 +16,22 @@ contract Escrow {
         _;
     }
 
+    modifier onlyBuyer(uint256 _nftId) {
+        require(msg.sender == buyer[_nftId], "Only buyer can call this method");
+        _;
+    }
+
+    modifier onlyInspector() {
+        require(msg.sender == inspector, "Only inspector can call this method");
+        _;
+    }
+
     mapping(uint256=>bool) public isListed;
     mapping(uint256=>uint256) public purchasePrice;
     mapping(uint256=>uint256) public escrowAmount;
     mapping(uint256=>address) public buyer;
+    mapping(uint256=>bool) public inspectionPassed;
+    mapping(uint256=>mapping(address => bool)) public approval;
 
     constructor(
         address _nftAddress,
@@ -41,5 +53,25 @@ contract Escrow {
         purchasePrice[_nftId]= _purchasePrice;
         buyer[_nftId]= _buyer;
         escrowAmount[_nftId]= _escrowAmount;
+    }
+
+    // Put under contract (only buyer - payable ecrow)
+    function depositEarnest(uint256 _nftId) public payable onlyBuyer(_nftId) {
+        require(msg.value >= escrowAmount[_nftId]);
+    }
+
+    receive() external payable {}
+
+    function getBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
+
+    function updateInspectionStatus(uint256 _nftId, bool _passed) public onlyInspector {
+        inspectionPassed[_nftId] = _passed;
+    }
+
+    // Approve a sale
+    function approveSale(uint256 _nftId) public  {
+        approval[_nftId][msg.sender] = true;
     }
 }

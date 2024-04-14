@@ -204,4 +204,26 @@ describe('Escrow', () => {
       expect(await escrow.getBalance()).to.be.equal(0);
     });
   });
+
+  describe('Cancel a sale', async () => {
+    beforeEach(async () => {
+      let transaction = await escrow
+        .connect(buyer)
+        .depositEarnest(1, { value: tokens(5) });
+
+      await transaction.wait();
+
+      transaction = await escrow
+        .connect(inspector)
+        .updateInspectionStatus(1, false);
+      await transaction.wait();
+
+      transaction = await escrow.connect(seller).cancelSale(1);
+      await transaction.wait();
+    });
+
+    it('Updates balance', async () => {
+      expect(await escrow.getBalance()).to.be.equal(0);
+    });
+  });
 });

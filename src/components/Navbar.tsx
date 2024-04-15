@@ -33,9 +33,11 @@ export const Navbar = ({
         <span style={{ color: '#6563ff' }}>Hive</span>
       </div>
 
-      <button className='button' onClick={onConnect}>
-        {account ? account : 'Connect Metamask'}
-      </button>
+      <div className='button_wrapper'>
+        <button className='button' onClick={onConnect}>
+          {account ? account : 'Connect Metamask'}
+        </button>
+      </div>
     </nav>
   );
 };

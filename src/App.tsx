@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { Navbar } from './components/Navbar';
 import { Properties } from './components/property/Index';
+import { Banner } from './components/Banner';
+import { Search } from './components/Search';
 
 const ethers = require('ethers');
 
@@ -40,6 +42,8 @@ function App() {
   return (
     <div className='container px-1'>
       <Navbar account={account} onConnect={onClickConnect} />
+      <Banner />
+      <Search />
       <Properties />
     </div>
   );

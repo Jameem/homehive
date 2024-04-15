@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
+        // const provider = new ethers.BrowserProvider(window.ethereum);
 
         window.ethereum.on('accountsChanged', async () => {
           const accounts = await window.ethereum?.request({

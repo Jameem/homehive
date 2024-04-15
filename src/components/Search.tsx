@@ -4,7 +4,7 @@ export const Search = () => {
   return (
     <div className='search-wrap'>
       <div className='search-title'>
-        <h2>Search. Explore. Buy.</h2>
+        <h2 className='text-[25px] font-bold mb-5'>Search. Explore. Buy.</h2>
       </div>
 
       <div className='search'>

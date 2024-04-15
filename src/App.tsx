@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Navbar } from './components/Navbar';
+import { Navbar } from './components/navbar/Navbar';
 import { Properties } from './components/property/Index';
 import { Banner } from './components/Banner';
 import { Search } from './components/Search';
@@ -40,7 +40,7 @@ function App() {
   };
 
   return (
-    <div className='container px-1'>
+    <div className='app-container '>
       <Navbar account={account} onConnect={onClickConnect} />
       <Banner />
       <Search />

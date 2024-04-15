@@ -11,7 +11,7 @@ export const Search = () => {
         <input
           type='text'
           className='search__term'
-          placeholder='What are you looking for?'
+          placeholder='Enter an address, city or ZIP code.'
         />
         <button type='submit' className='search__button'>
           <IoMdSearch size={25} />

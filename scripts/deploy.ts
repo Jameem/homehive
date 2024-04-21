@@ -1,5 +1,3 @@
-import { properties } from '../metadata/properties';
-
 const { ethers } = require('hardhat');
 
 const tokens = (n: number) => {
@@ -19,9 +17,9 @@ async function main() {
   console.log(`Minting 3 properties...\n`);
 
   for (let i = 1; i <= 3; i++) {
-    const transaction = await property
-      .connect(seller)
-      .mint(properties[`property${i}`]);
+    const uri = `https://ipfs.io/ipfs/QmQVcpsjrA6cr1iJjZAodYwmPekYgbnXGo4DFubJiLc2EB/${i}.json`;
+
+    const transaction = await property.connect(seller).mint(uri);
     await transaction.wait();
   }
   console.log(`Deploying escrow...\n`);

@@ -51,7 +51,9 @@ describe('Escrow', () => {
     property = await RealEstate.deploy();
 
     // Mint
-    let transaction = await property.connect(seller).mint(testProperty);
+    let transaction = await property
+      .connect(seller)
+      .mint(JSON.stringify(testProperty));
     await transaction.wait();
 
     // Deploy Escrow

@@ -7,11 +7,11 @@ export const Navbar = ({
   account,
   onConnect,
 }: {
-  account: string;
+  account?: string;
   onConnect: () => Promise<void>;
 }) => {
   const getAccount = () => {
-    return `${account.slice(0, 6)}...${account.slice(38, 42)}`;
+    return `${account?.slice(0, 6)}...${account?.slice(38, 42)}`;
   };
   return (
     <nav className='navbar'>
